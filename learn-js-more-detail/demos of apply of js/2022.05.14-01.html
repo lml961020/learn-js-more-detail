@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            background-color: aquamarine;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- this is a demo of how vue to render the template -->
+    <!-- first: we ues the innerhtml to render the screen -->
+    <div id="app">123</div>
+    
+    <script>
+        let app = document.querySelector("#app")
+        // console.log(app.innerHTML)/123
+        // first：we use the innerhtml api to render the app
+        // app.innerHTML="456"、渲染的内容变为456
+        // app.innerHTML="<h1>789</h1>"/直接写成字符串；再来运用es6的模板字符串
+        // const obj={a:"hello",b:"app"}
+        // app.innerHTML=`${obj.a} this is app entry ${obj.b}`/在之前的过程中，都是运用innerhtml命令来进行渲染
+        
+        // 现在我们开始学如何讲虚拟dom转换为相应的模板
+
+        // 首先实现一个简单的模板字符串替换
+        var template = `{{name}}很厉害，才{{age}}了`
+        var context = {name:"bottle",age:"15"}
+
+        // 编写一个方法，实现一个render函数
+        function render(temp,cont){
+            return temp.replace(/{{(.*?)}}/g,(match, key) => {
+                 return cont[key.trim()]
+            })
+        }
+        // console.log(render(template,context))
+        app.innerHTML=render(template,context)
+        
+
+
+    </script>
+</body>
+</html>
